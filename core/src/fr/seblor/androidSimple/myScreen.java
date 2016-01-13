@@ -1,6 +1,7 @@
 package fr.seblor.androidSimple;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -59,7 +60,7 @@ public class myScreen implements Screen {
 		/*
 		 * Screen touched = player move
 		 */
-		if (Gdx.input.isTouched()) {
+		if (Gdx.input.isTouched() || Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			_spaceshipX = Gdx.input.getX() - _spaceship.getWidth() / 2;
 		}
 
@@ -67,6 +68,9 @@ public class myScreen implements Screen {
 		 * Drawing
 		 */
 		_batch.begin();
+		if (Gdx.app.getType().toString() == "Desktop") {
+			_batch.draw(new Texture(_pixmap), 0, 0);
+		}
 		_batch.draw(_spaceship, _spaceshipX, 0, _spaceship.getWidth(), _spaceship.getHeight());
 		_batch.end();
 	}
